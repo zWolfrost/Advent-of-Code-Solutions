@@ -1,9 +1,9 @@
 with open("input.txt", "r") as file:
 	data = file.read().splitlines()
 
-total_joltage = 0
-
 BATTERIES_TO_CHOOSE = 12 # set to 2 for pt.1
+
+total_joltage = 0
 
 for bank in data:
 	max_joltages = ""

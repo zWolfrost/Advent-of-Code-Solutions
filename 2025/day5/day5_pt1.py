@@ -1,18 +1,16 @@
 with open("input.txt", "r") as file:
-	fresh_ranges, ingredient_ids = file.read().split("\n\n")
+	fresh_data, ingredient_ids = file.read().split("\n\n")
 
-fresh_ranges = [id.split("-") for id in fresh_ranges.splitlines()]
-ingredient_ids = ingredient_ids.splitlines()
+fresh_ranges = [id.split("-") for id in fresh_data.splitlines()]
+fresh_ranges = [[int(id1), int(id2)] for id1, id2 in fresh_ranges]
+ingredient_ids = [int(id) for id in ingredient_ids.splitlines()]
 
 def is_fresh(id):
 	for start, end in fresh_ranges:
-		if int(start) <= int(id) <= int(end):
+		if start <= id <= end:
 			return True
 	return False
 
-total_fresh_ids = 0
-
-for id in ingredient_ids:
-	total_fresh_ids += is_fresh(id)
+total_fresh_ids = sum(is_fresh(id) for id in ingredient_ids)
 
 print("ANSWER:", total_fresh_ids)
